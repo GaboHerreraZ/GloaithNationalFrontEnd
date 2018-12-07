@@ -1,0 +1,45 @@
+<div style="padding-top:50px">
+    <h6>Seleccione la moneda en la cual quiere ver el consolidado</h6>
+    <div class="row">
+        <div class="col-md-4">
+            <form [formGroup]="rate">
+                <div class="form-group">
+                    <select formControlName="currency" class="form-control" id="exampleFormControlSelect1">
+                    <option value="">Seleccione...</option>
+                    <option>EUR</option>
+                    <option>AUD</option>
+                    <option>USD</option>
+                    <option>CAD</option>
+                  </select>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <button type="button " class="btn btn-success " (click)="getTotal() ">Calcular</button>
+        </div>
+    </div>
+    <div *ngIf="show " class="row ">
+        <div class="col-md-12 ">
+            <table class="table ">
+                <thead class="thead-dark ">
+                    <tr>
+                        <th scope="col ">SKU</th>
+                        <th scope="col ">TOTAL</th>
+                        <th scope="col ">TOTAL REDONDEADO</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of total | paginate:{itemsPerPage:7,currentPage:p} ">
+                        <td>{{item.Sku}}</td>
+                        <td>{{item.Converted}}</td>
+                        <td>{{item.Converted | bankersRoundig:2|currency:currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls *ngIf="show " (pageChange)="p=$event "></pagination-controls>
+        </div>
+    </div>
+</div>
+<ngx-loading [show]="loading ">
+</ngx-loading>

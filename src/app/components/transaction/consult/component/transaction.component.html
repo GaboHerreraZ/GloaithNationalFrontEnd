@@ -1,0 +1,24 @@
+<div style="padding-top:50px">
+    <h6>A continuación se visualizan todas las transacciones de los productos:</h6>
+    <br>
+    <table *ngIf="show" class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">SKU</th>
+                <th scope="col">AMOUNT</th>
+                <th scope="col">CURRENCY</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of transaction | paginate:{itemsPerPage:20,currentPage:p}">
+                <td>{{item.Sku}}</td>
+                <td>{{item.Amount}}</td>
+                <td>{{item.Currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination-controls *ngIf="show" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<ngx-loading [show]="loading">
+</ngx-loading>

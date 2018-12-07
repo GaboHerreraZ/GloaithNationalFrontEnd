@@ -1,0 +1,25 @@
+<div style="padding-top:50px">
+    <h6>La siguiente tabla presenta las conversiones de cada moneda:</h6>
+    <br>
+    <table *ngIf="show" class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ORIGEN</th>
+                <th scope="col">DESTINO</th>
+                <th scope="col">TARIFA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of rates | paginate:{itemsPerPage:20,currentPage:p}">
+                <td>{{item.Origin}}</td>
+                <td>{{item.Target}}</td>
+                <td>{{item.Value}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <pagination-controls *ngIf="show" (pageChange)="p = $event"></pagination-controls>
+
+</div>
+<ngx-loading [show]="loading">
+</ngx-loading>
